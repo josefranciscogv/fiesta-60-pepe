@@ -1,0 +1,544 @@
+﻿<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>60 Pepe · Confirma tu asistencia</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Sábado 19 de diciembre 2026 · 3:00 pm · Terraza Casa Verde Azabache">
+<meta property="og:type" content="website">
+<meta property="og:title" content="60 Pepe · Tienes una invitación especial">
+<meta property="og:description" content="Sábado 19 de diciembre 2026 · 3:00 pm · Terraza Casa Verde Azabache. Confirma tu asistencia.">
+<meta property="og:image" content="https://josefranciscogv.github.io/fiesta-60-pepe/og.jpg">
+<meta name="theme-color" content="#EDF1EC">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,600;1,6..96,400;1,6..96,500&family=Jost:wght@300;400;500;600&display=swap">
+<style>
+/* Layout: una sola columna estrecha como etiqueta de botella; la etiqueta (hero) va enmarcada con doble filete,
+   el resto respira sobre papel color agave. Diseño de un solo tema, deliberado. */
+:root{
+  --paper:#EDF1EC;      /* niebla de agave */
+  --paper-2:#F6F8F4;    /* papel de etiqueta */
+  --ink:#16302D;        /* agave profundo */
+  --ink-soft:#4A615D;
+  --agave:#4E7F77;      /* penca azul */
+  --anejo:#A8661F;      /* tequila añejo */
+  --anejo-soft:#E9D6BC;
+  --line:rgba(22,48,45,.16);
+  --line-strong:rgba(22,48,45,.42);
+  --danger:#9B3B2A;
+
+  --f-display:"Bodoni Moda","Didot","Bodoni 72",Georgia,serif;
+  --f-body:"Jost","Futura","Avenir Next","Segoe UI",system-ui,sans-serif;
+
+  --step--1:.8125rem; --step-0:1rem; --step-1:1.1875rem; --step-2:1.5rem; --step-3:2.125rem;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--paper);color:var(--ink);
+  font-family:var(--f-body);font-size:var(--step-0);line-height:1.55;font-weight:400;
+  -webkit-font-smoothing:antialiased;
+  padding-left:max(16px,env(safe-area-inset-left,0px));
+  padding-right:max(16px,env(safe-area-inset-right,0px));
+  padding-block:max(28px,env(safe-area-inset-top,0px)) max(40px,env(safe-area-inset-bottom,0px));
+}
+body::before{ /* textura sutil de fibra de agave */
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:0;opacity:.5;
+  background:
+    radial-gradient(120% 60% at 50% -10%, rgba(78,127,119,.16), transparent 60%),
+    radial-gradient(80% 50% at 50% 115%, rgba(168,102,31,.10), transparent 60%);
+}
+main{position:relative;z-index:1;max-width:30rem;margin:0 auto;display:flex;flex-direction:column;gap:2.25rem}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--anejo);outline-offset:3px;border-radius:2px}
+
+.eyebrow{
+  font-size:var(--step--1);letter-spacing:.24em;text-transform:uppercase;color:var(--ink-soft);
+  text-align:center;margin:0;font-weight:500;
+}
+
+/* ---------- Etiqueta (hero) ---------- */
+.label{
+  position:relative;background:var(--paper-2);
+  border:1px solid var(--line-strong);padding:7px;
+  box-shadow:0 1px 0 rgba(255,255,255,.7) inset, 0 24px 48px -32px rgba(22,48,45,.45);
+}
+.label-inner{
+  border:1px solid var(--line-strong);padding:1.6rem 1.25rem 1.35rem;
+  display:flex;flex-direction:column;align-items:center;text-align:center;gap:.25rem;
+}
+.label-top,.label-bottom{
+  display:flex;justify-content:space-between;width:100%;gap:.5rem;
+  font-size:.6875rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-soft);
+}
+.label-bottom{margin-top:.9rem;padding-top:.8rem;border-top:1px solid var(--line)}
+.agave{width:min(9.5rem,52%);height:auto;margin:.9rem 0 .2rem;color:var(--agave)}
+.agave path{fill:color-mix(in srgb,var(--agave) 14%,transparent);stroke:currentColor;stroke-width:1.1;stroke-linejoin:round}
+.agave .ground{fill:none;stroke:var(--anejo);stroke-width:1}
+.big60{
+  font-family:var(--f-display);font-weight:400;font-optical-sizing:auto;
+  font-size:clamp(6.5rem,34vw,9.5rem);line-height:.82;letter-spacing:-.02em;margin:.1rem 0 0;color:var(--ink);
+  font-variant-numeric:lining-nums;
+}
+.name{
+  font-family:var(--f-display);font-style:italic;font-weight:400;
+  font-size:clamp(2.4rem,11vw,3.1rem);line-height:1;margin:.15rem 0 0;color:var(--anejo);
+}
+.reserva{
+  margin-top:.75rem;font-size:.6875rem;letter-spacing:.32em;text-transform:uppercase;color:var(--ink);font-weight:500;
+  display:flex;align-items:center;gap:.75rem;
+}
+.reserva::before,.reserva::after{content:"";width:1.75rem;height:1px;background:var(--anejo)}
+
+/* ---------- Saludo ---------- */
+.greeting{text-align:center;display:flex;flex-direction:column;gap:.6rem;align-items:center}
+.guest{
+  font-family:var(--f-display);font-size:var(--step-3);line-height:1.1;margin:0;font-weight:400;text-wrap:balance;
+}
+.guest:empty{display:none}
+.greeting p{margin:0;font-size:var(--step-1);color:var(--ink-soft);font-weight:300;text-wrap:balance;max-width:24rem}
+
+/* ---------- Separador ---------- */
+.divider{display:flex;align-items:center;gap:.9rem;color:var(--anejo)}
+.divider::before,.divider::after{content:"";flex:1;height:1px;background:var(--line)}
+.divider svg{width:40px;height:22px}
+
+/* ---------- Detalles ---------- */
+.details{display:flex;flex-direction:column;margin:0}
+.row{
+  display:grid;grid-template-columns:7.25rem 1fr;gap:1rem;align-items:baseline;
+  padding:.95rem 0;border-bottom:1px solid var(--line);
+}
+.row:first-child{border-top:1px solid var(--line)}
+.row dt{font-size:var(--step--1);letter-spacing:.2em;text-transform:uppercase;color:var(--ink-soft);font-weight:500}
+.row dd{margin:0;font-size:var(--step-1);min-width:0}
+.row dd small{display:block;font-size:var(--step--1);color:var(--ink-soft);margin-top:.15rem}
+.row dd a{color:var(--agave);text-underline-offset:3px;text-decoration-thickness:1px;font-size:var(--step--1);letter-spacing:.04em}
+.adults{
+  align-self:center;display:inline-flex;align-items:center;gap:.55rem;margin-top:1.25rem;
+  border:1px solid var(--line-strong);border-radius:999px;padding:.4rem 1rem;
+  font-size:var(--step--1);letter-spacing:.2em;text-transform:uppercase;font-weight:500;
+}
+.adults svg{width:14px;height:14px;color:var(--anejo)}
+
+/* ---------- RSVP ---------- */
+.rsvp{display:flex;flex-direction:column;gap:1.5rem}
+.rsvp h2{
+  font-family:var(--f-display);font-weight:400;font-size:var(--step-3);line-height:1.1;margin:0;text-align:center;
+}
+fieldset{border:0;margin:0;padding:0;min-width:0;display:flex;flex-direction:column;gap:.7rem}
+legend,.field-label{
+  padding:0;margin-bottom:.7rem;font-size:var(--step--1);letter-spacing:.2em;text-transform:uppercase;
+  color:var(--ink-soft);font-weight:500;
+}
+.choices{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}
+.choice{position:relative}
+.choice input{position:absolute;opacity:0;pointer-events:none}
+.choice label{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.35rem;text-align:center;
+  min-height:5.25rem;padding:.9rem .6rem;cursor:pointer;
+  background:var(--paper-2);border:1px solid var(--line-strong);
+  font-size:var(--step-0);font-weight:500;line-height:1.25;
+  transition:background .18s ease,color .18s ease,border-color .18s ease,transform .18s ease;
+}
+.choice label svg{width:22px;height:22px;color:var(--agave);transition:color .18s ease}
+.choice label:hover{border-color:var(--ink)}
+.choice input:focus-visible + label{outline:2px solid var(--anejo);outline-offset:3px}
+.choice input:checked + label{background:var(--ink);color:var(--paper-2);border-color:var(--ink)}
+.choice input:checked + label svg{color:var(--anejo-soft)}
+
+.count{display:flex;flex-wrap:wrap;gap:.5rem}
+.count button{
+  font:inherit;font-size:var(--step-1);font-variant-numeric:tabular-nums;
+  width:3.1rem;height:3.1rem;border:1px solid var(--line-strong);background:var(--paper-2);color:var(--ink);
+  cursor:pointer;transition:background .15s ease,color .15s ease,border-color .15s ease;
+}
+.count button:hover{border-color:var(--ink)}
+.count button[aria-pressed="true"]{background:var(--ink);color:var(--paper-2);border-color:var(--ink)}
+.hint{margin:.6rem 0 0;font-size:var(--step--1);color:var(--ink-soft)}
+.hint b{color:var(--anejo);font-weight:600}
+
+.input{
+  width:100%;font:inherit;font-size:var(--step-1);color:var(--ink);background:var(--paper-2);
+  border:1px solid var(--line-strong);border-radius:0;padding:.85rem 1rem;letter-spacing:.03em;
+  -webkit-appearance:none;appearance:none;
+}
+.input:focus{outline:none;border-color:var(--ink);box-shadow:0 0 0 3px color-mix(in srgb,var(--anejo) 30%,transparent)}
+.input[aria-invalid="true"]{border-color:var(--danger)}
+.err{margin:.45rem 0 0;font-size:var(--step--1);color:var(--danger)}
+
+.submit{
+  font:inherit;font-size:var(--step--1);letter-spacing:.26em;text-transform:uppercase;font-weight:600;
+  width:100%;padding:1.15rem 1rem;border:0;cursor:pointer;
+  background:var(--ink);color:var(--paper-2);position:relative;overflow:hidden;
+  transition:background .2s ease;
+}
+.submit:hover{background:var(--anejo)}
+.submit:disabled{cursor:progress;opacity:.75}
+.submit .spin{display:none;width:14px;height:14px;border:1.5px solid currentColor;border-right-color:transparent;border-radius:50%;margin-right:.6rem;vertical-align:-2px;animation:spin .8s linear infinite}
+.submit.loading .spin{display:inline-block}
+@keyframes spin{to{transform:rotate(360deg)}}
+.deadline{text-align:center;margin:0;font-size:var(--step--1);color:var(--ink-soft);letter-spacing:.04em}
+.deadline b{font-weight:500;color:var(--ink)}
+.form-error{margin:0;padding:.8rem 1rem;border:1px solid var(--danger);color:var(--danger);font-size:var(--step--1);background:color-mix(in srgb,var(--danger) 6%,var(--paper-2))}
+
+/* ---------- Confirmación enviada ---------- */
+.done{
+  background:var(--paper-2);border:1px solid var(--line-strong);padding:2rem 1.4rem;text-align:center;
+  display:flex;flex-direction:column;align-items:center;gap:.8rem;
+}
+.done svg.mark{width:52px;height:52px;color:var(--anejo)}
+.done h2{font-family:var(--f-display);font-weight:400;font-size:var(--step-3);margin:0;line-height:1.1;text-wrap:balance}
+.done p{margin:0;color:var(--ink-soft);max-width:22rem;text-wrap:balance}
+.done .summary{
+  display:flex;flex-wrap:wrap;justify-content:center;gap:.4rem .9rem;margin-top:.3rem;
+  font-size:var(--step--1);letter-spacing:.14em;text-transform:uppercase;color:var(--ink);font-weight:500;
+}
+.done .actions{display:flex;flex-wrap:wrap;justify-content:center;gap:.6rem;margin-top:.6rem}
+.ghost{
+  font:inherit;font-size:var(--step--1);letter-spacing:.16em;text-transform:uppercase;font-weight:500;
+  padding:.75rem 1.1rem;background:transparent;border:1px solid var(--line-strong);color:var(--ink);
+  cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:.5rem;
+}
+.ghost:hover{border-color:var(--ink);background:var(--paper)}
+.ghost svg{width:15px;height:15px}
+
+footer{
+  text-align:center;padding-top:1.5rem;border-top:1px solid var(--line);
+  display:flex;flex-direction:column;gap:.3rem;align-items:center;
+}
+footer .k{font-size:.6875rem;letter-spacing:.3em;text-transform:uppercase;color:var(--ink-soft);font-weight:500}
+footer .v{font-family:var(--f-display);font-style:italic;font-size:var(--step-2);color:var(--ink);line-height:1.2}
+footer .v:empty{display:none}
+
+.vista-tag{
+  align-self:center;margin-bottom:-1.25rem;
+  font-size:.625rem;letter-spacing:.2em;text-transform:uppercase;font-weight:600;
+  background:var(--anejo);color:var(--paper-2);padding:.35rem .6rem;
+}
+
+/* Entrada: los elementos ya están visibles; solo se asientan suavemente */
+@media (prefers-reduced-motion:no-preference){
+  .label{animation:settle .9s cubic-bezier(.2,.7,.2,1) both}
+  .agave path{stroke-dasharray:220;stroke-dashoffset:0;animation:draw 1.8s ease-out both}
+  .agave path:nth-child(2){animation-delay:.08s}.agave path:nth-child(3){animation-delay:.16s}
+  .agave path:nth-child(4){animation-delay:.24s}.agave path:nth-child(5){animation-delay:.32s}
+  .agave path:nth-child(6){animation-delay:.4s}.agave path:nth-child(7){animation-delay:.48s}
+  .reveal{animation:rise .6s ease-out both}
+}
+@keyframes settle{from{transform:translateY(8px)}to{transform:none}}
+@keyframes draw{from{stroke-dashoffset:220}to{stroke-dashoffset:0}}
+@keyframes rise{from{transform:translateY(6px);opacity:.4}to{transform:none;opacity:1}}
+
+@media (max-width:380px){
+  .row{grid-template-columns:1fr;gap:.2rem}
+  .choice label{min-height:4.75rem;font-size:.9375rem}
+}
+</style>
+</head>
+<body>
+<main>
+  <p class="eyebrow">Tienes una invitación especial</p>
+
+  <section class="label" aria-label="60 Pepe">
+    <div class="label-inner">
+      <div class="label-top"><span>Reserva especial</span><span>100% agave</span></div>
+      <svg class="agave" viewBox="0 0 120 80" aria-hidden="true">
+        <path d="M60 72 C57 47 58 26 60 5 C62 26 63 47 60 72Z"/>
+        <path d="M60 72 C51 52 41 33 28 15 C44 31 54 49 60 72Z"/>
+        <path d="M60 72 C69 52 79 33 92 15 C76 31 66 49 60 72Z"/>
+        <path d="M60 72 C45 61 28 49 9 41 C29 46 46 57 60 72Z"/>
+        <path d="M60 72 C75 61 92 49 111 41 C91 46 74 57 60 72Z"/>
+        <path d="M60 72 C47 70 31 67 16 61 C32 63 47 67 60 72Z"/>
+        <path d="M60 72 C73 70 89 67 104 61 C88 63 73 67 60 72Z"/>
+        <line class="ground" x1="18" y1="74" x2="102" y2="74"/>
+      </svg>
+      <h1 class="big60">60</h1>
+      <p class="name">Pepe</p>
+      <p class="reserva">Añejo de colección</p>
+      <div class="label-bottom"><span>Cosecha 1966</span><span>60 años</span></div>
+    </div>
+  </section>
+
+  <section class="greeting">
+    <h2 class="guest" id="guestName"></h2>
+    <p>Te invitamos a celebrar este día tan especial</p>
+  </section>
+
+  <div class="divider" aria-hidden="true">
+    <svg viewBox="0 0 40 22" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linejoin="round"><path d="M20 19 C19.2 13 19.4 7 20 2 C20.6 7 20.8 13 20 19Z"/><path d="M20 19 C17 14 14 10 10 6 C14.5 9.5 18 14 20 19Z"/><path d="M20 19 C23 14 26 10 30 6 C25.5 9.5 22 14 20 19Z"/><path d="M20 19 C15.5 16.5 10 14.5 4 13.5 C10.5 14 16 16 20 19Z"/><path d="M20 19 C24.5 16.5 30 14.5 36 13.5 C29.5 14 24 16 20 19Z"/><path d="M8 20.5h24"/></svg>
+  </div>
+
+  <section aria-label="Detalles del evento" style="display:flex;flex-direction:column">
+    <dl class="details">
+      <div class="row"><dt>Fecha</dt><dd>Sábado 19 de diciembre 2026</dd></div>
+      <div class="row"><dt>Hora</dt><dd>3:00 pm</dd></div>
+      <div class="row"><dt>Lugar</dt><dd>Terraza Casa Verde Azabache<small><a href="https://www.google.com/maps/search/?api=1&amp;query=Terraza+Casa+Verde+Azabache" target="_blank" rel="noopener">Ver ubicación en el mapa</a></small></dd></div>
+      <div class="row"><dt>Dress code</dt><dd>Semi formal</dd></div>
+    </dl>
+    <span class="adults">
+      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><circle cx="8" cy="8" r="6.5"/><path d="M3.4 12.6 12.6 3.4"/></svg>
+      No niños
+    </span>
+  </section>
+
+  <div class="divider" aria-hidden="true">
+    <svg viewBox="0 0 40 22" fill="none" stroke="currentColor" stroke-width="1.1" stroke-linejoin="round"><path d="M20 19 C19.2 13 19.4 7 20 2 C20.6 7 20.8 13 20 19Z"/><path d="M20 19 C17 14 14 10 10 6 C14.5 9.5 18 14 20 19Z"/><path d="M20 19 C23 14 26 10 30 6 C25.5 9.5 22 14 20 19Z"/><path d="M20 19 C15.5 16.5 10 14.5 4 13.5 C10.5 14 16 16 20 19Z"/><path d="M20 19 C24.5 16.5 30 14.5 36 13.5 C29.5 14 24 16 20 19Z"/><path d="M8 20.5h24"/></svg>
+  </div>
+
+  <!-- Formulario -->
+  <section class="rsvp" id="rsvpSection">
+    <h2>Confirma tu asistencia</h2>
+    <form id="rsvpForm" novalidate class="rsvp">
+      <div id="nameField" hidden>
+        <label class="field-label" for="nombre" style="display:block">Tu nombre</label>
+        <input class="input" id="nombre" name="nombre" autocomplete="name" placeholder="Nombre y apellido">
+        <p class="err" id="nombreErr" hidden>Escribe tu nombre para saber quién confirma.</p>
+      </div>
+
+      <fieldset>
+        <legend>¿Nos acompañas?</legend>
+        <div class="choices">
+          <div class="choice">
+            <input type="radio" name="asiste" id="asisteSi" value="si">
+            <label for="asisteSi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M7 3h10l-1.2 7.2a3.8 3.8 0 0 1-7.6 0L7 3Z"/><path d="M12 14v6M8.5 21h7"/><path d="M7.6 6.5h8.8"/></svg>Sí, ahí estaré</label>
+          </div>
+          <div class="choice">
+            <input type="radio" name="asiste" id="asisteNo" value="no">
+            <label for="asisteNo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><path d="M7 3h10l-1.2 7.2a3.8 3.8 0 0 1-7.6 0L7 3Z"/><path d="M12 14v6M8.5 21h7"/><path d="M4 4l16 16"/></svg>No podré asistir</label>
+          </div>
+        </div>
+        <p class="err" id="asisteErr" hidden>Elige una opción para confirmar.</p>
+      </fieldset>
+
+      <div id="countField" hidden>
+        <span class="field-label" id="countLabel" style="display:block">¿Cuántas personas confirmas?</span>
+        <div class="count" id="count" role="group" aria-labelledby="countLabel"></div>
+        <p class="hint" id="countHint"></p>
+      </div>
+
+      <div>
+        <label class="field-label" for="telefono" style="display:block">Celular de contacto</label>
+        <input class="input" id="telefono" name="telefono" type="tel" inputmode="tel" autocomplete="tel" placeholder="10 dígitos">
+        <p class="err" id="telErr" hidden>Revisa tu número: debe tener al menos 10 dígitos.</p>
+      </div>
+
+      <p class="form-error" id="formError" role="alert" hidden>Hubo un problema al enviar tu confirmación. Por favor intenta de nuevo en un momento.</p>
+
+      <button class="submit" id="submitBtn" type="submit"><span class="spin" aria-hidden="true"></span><span id="submitText">Enviar confirmación</span></button>
+      <p class="deadline">Favor de confirmar antes del <b>30 de noviembre</b></p>
+    </form>
+  </section>
+
+  <!-- Confirmación enviada -->
+  <section class="done reveal" id="doneSection" hidden aria-live="polite">
+    <svg class="mark" viewBox="0 0 52 52" fill="none" stroke="currentColor" stroke-width="1.3" aria-hidden="true"><circle cx="26" cy="26" r="24"/><path d="M16.5 26.5 23 33 36 19.5" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <h2 id="doneTitle"></h2>
+    <p id="doneText"></p>
+    <div class="summary" id="doneSummary"></div>
+    <div class="actions">
+      <a class="ghost" id="calBtn" target="_blank" rel="noopener" hidden href="https://calendar.google.com/calendar/render?action=TEMPLATE&amp;text=60%20Pepe&amp;dates=20261219T150000/20261219T230000&amp;ctz=America/Mexico_City&amp;location=Terraza%20Casa%20Verde%20Azabache&amp;details=Dress%20code%3A%20Semi%20formal.%20No%20ni%C3%B1os.">
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.3"><rect x="2" y="3" width="12" height="11" rx="1"/><path d="M2 6.5h12M5.5 1.5v3M10.5 1.5v3"/></svg>
+        Agregar al calendario
+      </a>
+      <button class="ghost" id="changeBtn" type="button">Cambiar mi respuesta</button>
+    </div>
+  </section>
+
+  <footer>
+    <span class="k">Invitación personal</span>
+    <span class="v" id="footerName"></span>
+  </footer>
+</main>
+
+<script src="config.js"></script>
+<script>
+(function(){
+  "use strict";
+  var CFG = window.FIESTA || {};
+  var API = String(CFG.API_URL || "").trim();
+  var DEMO = !API;
+  var $ = function(id){ return document.getElementById(id); };
+
+  // ---------- Datos del invitado (liga personalizada) ----------
+  var q = new URLSearchParams(location.search);
+  var guest = {
+    id: (q.get("i") || "").trim(),
+    nombre: (q.get("n") || "").trim(),
+    telefono: (q.get("t") || "").trim(),
+    personas: parseInt(q.get("p"), 10) || 0
+  };
+  if (DEMO && !guest.id && !guest.nombre) {
+    guest = { id: "a1", nombre: "Familia Hernández", telefono: "33 1234 5678", personas: 4 };
+    var tag = document.createElement("span");
+    tag.className = "vista-tag"; tag.textContent = "Vista previa";
+    document.querySelector("main").prepend(tag);
+  }
+
+  var state = { asiste: "", personas: 0 };
+  var storeKey = "rsvp60:" + (guest.id || "anon");
+
+  function maxPersonas(){ return Math.max(1, guest.personas || parseInt(CFG.PERSONAS_DEFAULT, 10) || 1); }
+
+  function renderGuest(){
+    $("guestName").textContent = guest.nombre;
+    $("footerName").textContent = guest.nombre;
+    $("nameField").hidden = !!guest.nombre;
+    if (guest.nombre) document.title = "60 Pepe · " + guest.nombre;
+    if (!$("telefono").value) $("telefono").value = guest.telefono;
+
+    var max = maxPersonas();
+    var box = $("count"); box.innerHTML = "";
+    for (var n = 1; n <= max; n++) {
+      var b = document.createElement("button");
+      b.type = "button"; b.textContent = n; b.dataset.n = n;
+      b.setAttribute("aria-pressed", "false");
+      b.setAttribute("aria-label", n + (n === 1 ? " persona" : " personas"));
+      box.appendChild(b);
+    }
+    $("countHint").innerHTML = "Tu invitación incluye hasta <b>" + max + (max === 1 ? " persona" : " personas") + "</b>";
+    if (state.personas > max) state.personas = max;
+    if (!state.personas) state.personas = max;
+    syncCount();
+  }
+
+  function syncCount(){
+    Array.prototype.forEach.call($("count").children, function(b){
+      b.setAttribute("aria-pressed", String(+b.dataset.n === state.personas));
+    });
+  }
+
+  $("count").addEventListener("click", function(e){
+    var b = e.target.closest("button"); if (!b) return;
+    state.personas = +b.dataset.n; syncCount();
+  });
+
+  Array.prototype.forEach.call(document.querySelectorAll('input[name="asiste"]'), function(r){
+    r.addEventListener("change", function(){
+      state.asiste = r.value;
+      $("countField").hidden = state.asiste !== "si";
+      $("asisteErr").hidden = true;
+    });
+  });
+
+  // ---------- Envío ----------
+  function digits(s){ return String(s || "").replace(/\D/g, ""); }
+
+  function validate(){
+    var ok = true;
+    if (!guest.nombre) {
+      var bad = $("nombre").value.trim().length < 2;
+      $("nombre").setAttribute("aria-invalid", String(bad)); $("nombreErr").hidden = !bad; if (bad) ok = false;
+    }
+    if (!state.asiste) { $("asisteErr").hidden = false; ok = false; }
+    var tbad = digits($("telefono").value).length < 10;
+    $("telefono").setAttribute("aria-invalid", String(tbad)); $("telErr").hidden = !tbad; if (tbad) ok = false;
+    return ok;
+  }
+
+  function post(payload){
+    if (DEMO) {
+      return new Promise(function(res){ setTimeout(function(){
+        try {
+          var all = JSON.parse(localStorage.getItem("rsvp60:demo-respuestas") || "{}");
+          all[payload.id || payload.nombre] = payload;
+          localStorage.setItem("rsvp60:demo-respuestas", JSON.stringify(all));
+        } catch(e){}
+        res({ ok: true });
+      }, 650); });
+    }
+    // text/plain evita la verificación CORS previa de Apps Script
+    return fetch(API, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify(payload), redirect: "follow" })
+      .then(function(r){ return r.json(); })
+      .then(function(j){ if (!j || !j.ok) throw new Error((j && j.error) || "error"); return j; });
+  }
+
+  $("rsvpForm").addEventListener("submit", function(e){
+    e.preventDefault();
+    $("formError").hidden = true;
+    if (!validate()) return;
+    var payload = {
+      id: guest.id,
+      nombre: guest.nombre || $("nombre").value.trim(),
+      asiste: state.asiste,
+      personas: state.asiste === "si" ? state.personas : 0,
+      telefono: $("telefono").value.trim(),
+      fecha: new Date().toISOString()
+    };
+    var btn = $("submitBtn");
+    btn.disabled = true; btn.classList.add("loading"); $("submitText").textContent = "Enviando";
+    post(payload).then(function(){
+      try { localStorage.setItem(storeKey, JSON.stringify(payload)); } catch(err){}
+      showDone(payload);
+    }).catch(function(){
+      $("formError").hidden = false;
+    }).then(function(){
+      btn.disabled = false; btn.classList.remove("loading"); $("submitText").textContent = "Enviar confirmación";
+    });
+  });
+
+  function showDone(r){
+    var first = (r.nombre || "").split(" ")[0];
+    if (r.asiste === "si") {
+      $("doneTitle").textContent = "¡Gracias" + (first && !/^familia$/i.test(first) ? ", " + first : "") + "! Te esperamos";
+      $("doneText").textContent = "Tu asistencia quedó confirmada. Nos vemos el sábado 19 de diciembre a las 3:00 pm en la Terraza Casa Verde Azabache.";
+      $("doneSummary").innerHTML = "";
+      ["Asistiré", r.personas + (r.personas === 1 ? " persona" : " personas")].forEach(function(t){
+        var s = document.createElement("span"); s.textContent = t; $("doneSummary").appendChild(s);
+      });
+      $("calBtn").hidden = false;
+    } else {
+      $("doneTitle").textContent = "Gracias por avisarnos";
+      $("doneText").textContent = "Te vamos a extrañar. Si tus planes cambian, puedes actualizar tu respuesta desde esta misma liga antes del 30 de noviembre.";
+      $("doneSummary").innerHTML = "<span>No podré asistir</span>";
+      $("calBtn").hidden = true;
+    }
+    $("rsvpSection").hidden = true;
+    $("doneSection").hidden = false;
+  }
+
+  $("changeBtn").addEventListener("click", function(){
+    $("doneSection").hidden = true; $("rsvpSection").hidden = false;
+    $("rsvpSection").scrollIntoView({ behavior: "smooth", block: "start" });
+  });
+
+  function applyPrevious(r){
+    if (!r || !r.asiste) return;
+    state.asiste = r.asiste;
+    var radio = r.asiste === "si" ? $("asisteSi") : $("asisteNo"); radio.checked = true;
+    $("countField").hidden = r.asiste !== "si";
+    if (r.personas) { state.personas = Math.min(+r.personas, maxPersonas()); syncCount(); }
+    if (r.telefono) $("telefono").value = r.telefono;
+    showDone(r);
+  }
+
+  // ---------- Inicio ----------
+  renderGuest();
+  var prev = null;
+  try { prev = JSON.parse(localStorage.getItem(storeKey) || "null"); } catch(e){}
+  if (prev) applyPrevious(prev);
+
+  // Con backend: refresca datos del invitado (por si cambiaron en la hoja) y su respuesta previa
+  if (!DEMO && guest.id) {
+    fetch(API + "?action=guest&id=" + encodeURIComponent(guest.id))
+      .then(function(r){ return r.json(); })
+      .then(function(j){
+        if (!j || !j.ok || !j.invitado) return;
+        var g = j.invitado;
+        guest.nombre = g.nombre || guest.nombre;
+        guest.personas = parseInt(g.personas, 10) || guest.personas;
+        if (!guest.telefono && g.telefono) guest.telefono = String(g.telefono);
+        renderGuest();
+        if (j.respuesta && !prev) applyPrevious(j.respuesta);
+      })
+      .catch(function(){});
+  }
+})();
+</script>
+</body>
+</html>
