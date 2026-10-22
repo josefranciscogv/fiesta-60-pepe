@@ -417,7 +417,7 @@ td .acts{display:flex;gap:.4rem;justify-content:flex-end;flex-wrap:nowrap}
     var first = r.nombre;
     var msg = reminder
       ? "Hola " + first + ", te recordamos confirmar tu asistencia a los 60 de Pepe antes del 30 de noviembre. Tu liga personal: " + inviteLink(r)
-      : "¡Hola " + first + "! Queremos que nos acompañes a celebrar los 60 de Pepe el sábado 19 de diciembre a las 3:00 pm. Confirma tu asistencia aquí: " + inviteLink(r);
+      : "¡Hola " + first + "! Queremos que nos acompañes a celebrar los 60 de Pepe el sábado 19 de diciembre a las 2:30 pm. Confirma tu asistencia aquí: " + inviteLink(r);
     var n = waNumber(r.telefono);
     return "https://wa.me/" + (n || "") + "?text=" + encodeURIComponent(msg);
   }
