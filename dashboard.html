@@ -315,7 +315,7 @@ td .acts{display:flex;gap:.4rem;justify-content:flex-end;flex-wrap:nowrap}
     set: function(k,v){ try { localStorage.setItem(k,v); } catch(e){} },
     del: function(k){ try { localStorage.removeItem(k); } catch(e){} }
   };
-  var DEADLINE = new Date("2026-11-30T23:59:59-06:00");
+  var DEADLINE = new Date("2026-11-15T23:59:59-06:00");
   var INVITE_URL = CFG.INVITACION_URL || new URL("./", location.href).href;
 
   var data = null, open = null, filterPanel = "", filterTable = "";
@@ -416,7 +416,7 @@ td .acts{display:flex;gap:.4rem;justify-content:flex-end;flex-wrap:nowrap}
   function waLink(r, reminder){
     var first = r.nombre;
     var msg = reminder
-      ? "Hola " + first + ", te recordamos confirmar tu asistencia a los 60 de Pepe antes del 30 de noviembre. Tu liga personal: " + inviteLink(r)
+      ? "Hola " + first + ", te recordamos confirmar tu asistencia a los 60 de Pepe antes del 15 de noviembre. Tu liga personal: " + inviteLink(r)
       : "¡Hola " + first + "! Queremos que nos acompañes a celebrar los 60 de Pepe el sábado 19 de diciembre a las 2:30 pm. Confirma tu asistencia aquí: " + inviteLink(r);
     var n = waNumber(r.telefono);
     return "https://wa.me/" + (n || "") + "?text=" + encodeURIComponent(msg);
@@ -451,7 +451,7 @@ td .acts{display:flex;gap:.4rem;justify-content:flex-end;flex-wrap:nowrap}
     var bars = $("barInv").children;
     bars[0].style.flexGrow = g.si.length; bars[1].style.flexGrow = g.no.length; bars[2].style.flexGrow = g.pend.length;
     var days = Math.ceil((DEADLINE - new Date()) / 864e5);
-    $("daysLeft").innerHTML = days > 0 ? "Fecha límite 30 nov · <b>" + plural(days, "día", "días") + "</b>" : "<b>La fecha límite ya pasó</b>";
+    $("daysLeft").innerHTML = days > 0 ? "Fecha límite 15 nov · <b>" + plural(days, "día", "días") + "</b>" : "<b>La fecha límite ya pasó</b>";
     $("capText").textContent = fmtN.format(perSi) + " de " + fmtN.format(Math.max(cupoTotal, perSi));
     var cb = $("barCap").children; cb[0].style.flexGrow = perSi; cb[1].style.flexGrow = Math.max(0, cupoTotal - perSi);
 
