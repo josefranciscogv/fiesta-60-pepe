@@ -164,7 +164,7 @@ header{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-be
 .section-head p{margin:.2rem 0 0;color:var(--muted);font-size:.88rem;max-width:40rem}
 .table-card{background:var(--surface);border:1px solid var(--line);border-radius:14px;overflow:hidden}
 .table-scroll{overflow-x:auto}
-table{width:100%;border-collapse:collapse;font-size:.88rem;min-width:44rem}
+table{width:100%;border-collapse:collapse;font-size:.88rem;min-width:54rem}
 th{text-align:left;font-weight:600;font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);padding:.75rem 1rem;background:var(--surface-2);border-bottom:1px solid var(--line)}
 td{padding:.7rem 1rem;border-bottom:1px solid var(--line);vertical-align:middle}
 tr:last-child td{border-bottom:0}
@@ -172,6 +172,26 @@ td.num{font-variant-numeric:tabular-nums;text-align:center}
 td .lw{display:none}
 th.num{text-align:center}
 td .acts{display:flex;gap:.4rem;justify-content:flex-end;flex-wrap:nowrap}
+/* Seguimiento de envío */
+.sent{
+  display:inline-flex;align-items:center;gap:.5rem;cursor:pointer;background:none;border:0;padding:.15rem 0;
+  font-size:.8rem;color:var(--muted);white-space:nowrap;text-align:left;
+}
+.sent .sw{position:relative;width:30px;height:18px;border-radius:999px;background:var(--line-strong);flex:none;transition:background .15s ease}
+.sent .sw::after{content:"";position:absolute;top:2px;left:2px;width:14px;height:14px;border-radius:50%;background:var(--surface);transition:transform .15s ease;box-shadow:0 1px 2px rgba(0,0,0,.25)}
+.sent[aria-pressed="true"]{color:var(--ink)}
+.sent[aria-pressed="true"] .sw{background:var(--si)}
+.sent[aria-pressed="true"] .sw::after{transform:translateX(12px)}
+.sent[disabled]{cursor:progress;opacity:.6}
+.opened{display:block;font-size:.72rem;color:var(--accent);margin-top:.15rem;padding-left:38px}
+.chips{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:-.6rem}
+.chip{
+  display:inline-flex;align-items:center;gap:.4rem;padding:.35rem .75rem;border-radius:999px;cursor:pointer;
+  border:1px solid var(--line-strong);background:var(--surface);font-size:.8rem;font-weight:500;color:var(--ink);
+}
+.chip b{font-weight:600;font-variant-numeric:tabular-nums;color:var(--muted)}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.chip[aria-pressed="true"] b{color:var(--bg);opacity:.75}
 .copied{color:var(--si)!important;border-color:var(--si)!important}
 
 /* Clave */
@@ -207,6 +227,7 @@ td .acts{display:flex;gap:.4rem;justify-content:flex-end;flex-wrap:nowrap}
   td .lw{display:inline}
   td:nth-child(3){grid-column:2;grid-row:2;text-align:right;font-size:.8rem;color:var(--muted)}
   td:nth-child(5){grid-column:1 / -1;grid-row:3}
+  td:nth-child(6){grid-column:1 / -1;grid-row:4}
   td .acts{justify-content:flex-start}
   td.empty{grid-column:1 / -1}
   .tools{width:100%}
@@ -236,6 +257,10 @@ td .acts{display:flex;gap:.4rem;justify-content:flex-end;flex-wrap:nowrap}
   <div class="banner" id="demoBanner" hidden>
     <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="10" cy="10" r="8"/><path d="M10 6v5M10 14h.01"/></svg>
     <div><b>Datos de ejemplo.</b> Así se verá el dashboard. Cuando pegues la URL de tu Apps Script en <code>config.js</code>, aquí aparecerán las confirmaciones reales.</div>
+  </div>
+  <div class="banner" id="noIdBanner" hidden>
+    <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="10" cy="10" r="8"/><path d="M10 6v5M10 14h.01"/></svg>
+    <div id="noIdText"></div>
   </div>
   <div class="banner err" id="errBanner" hidden>
     <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="10" cy="10" r="8"/><path d="M10 6v5M10 14h.01"/></svg>
@@ -280,14 +305,15 @@ td .acts{display:flex;gap:.4rem;justify-content:flex-end;flex-wrap:nowrap}
   <div class="section-head">
     <div>
       <h2>Invitados y ligas</h2>
-      <p>Cada invitado tiene su liga personal con nombre, celular y número de lugares. Cópiala o envíala directo por WhatsApp.</p>
+      <p>Cada invitado tiene su liga personal con nombre, celular y número de lugares. Cópiala o envíala directo por WhatsApp; al darle Enviar queda marcada como enviada.</p>
     </div>
     <input class="search" id="tableSearch" type="search" placeholder="Buscar invitado" aria-label="Buscar invitado">
   </div>
+  <div class="chips" id="chips" role="group" aria-label="Filtrar invitados"></div>
   <div class="table-card">
     <div class="table-scroll">
       <table>
-        <thead><tr><th>Invitado</th><th class="num">Lugares</th><th>Celular</th><th>Estado</th><th style="text-align:right">Liga</th></tr></thead>
+        <thead><tr><th>Invitado</th><th class="num">Lugares</th><th>Celular</th><th>Estado</th><th>Envío</th><th style="text-align:right">Liga</th></tr></thead>
         <tbody id="tbody"></tbody>
       </table>
     </div>
@@ -318,7 +344,7 @@ td .acts{display:flex;gap:.4rem;justify-content:flex-end;flex-wrap:nowrap}
   var DEADLINE = new Date("2026-11-15T23:59:59-06:00");
   var INVITE_URL = CFG.INVITACION_URL || new URL("./", location.href).href;
 
-  var data = null, open = null, filterPanel = "", filterTable = "";
+  var data = null, open = null, filterPanel = "", filterTable = "", filterChip = "todos";
 
   // ---------- Datos de ejemplo (solo vista previa) ----------
   function demoData(){
@@ -328,7 +354,8 @@ td .acts{display:flex;gap:.4rem;justify-content:flex-end;flex-wrap:nowrap}
       ["a7","Familia Partida","3315566778",3],["a8","Jorge Navarro","3316677889",2],["a9","Familia Cárdenas","3317788990",4],
       ["a10","Rocío Lomelí","3318899001",1],["a11","Los Ibarra","3311231234",3],["a12","Martha y Luis Pérez","3314564567",2],
       ["a13","Compadres Aceves","3317897890",2],["a14","Gabriela Fonseca","3310001112",1]
-    ].map(function(r){ return { id:r[0], nombre:r[1], telefono:r[2], personas:r[3] }; });
+    ].map(function(r, i){ return { id:r[0], nombre:r[1], telefono:r[2], personas:r[3],
+      enviada: i < 11 ? "2026-10-1" + (i % 9) + "T18:00:00Z" : "", abierta: i < 9 ? "2026-10-2" + (i % 9) + "T20:00:00Z" : "" }; });
     var resp = [
       ["a1","si",4,"2026-10-20T19:12:00Z"],["a2","si",2,"2026-10-20T21:40:00Z"],["a3","no",0,"2026-10-21T02:05:00Z"],
       ["a4","si",4,"2026-10-21T15:22:00Z"],["a6","si",2,"2026-10-21T18:03:00Z"],["a8","no",0,"2026-10-22T01:47:00Z"],
@@ -374,18 +401,31 @@ td .acts{display:flex;gap:.4rem;justify-content:flex-end;flex-wrap:nowrap}
   $("keyInput").addEventListener("keydown", function(e){ if (e.key === "Enter") $("keyBtn").click(); });
 
   // ---------- Modelo ----------
+  function norm(s){ return String(s || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase().replace(/\s+/g, " ").trim(); }
+
   function model(){
-    var byId = {};
-    (data.respuestas || []).forEach(function(r){ byId[String(r.id)] = r; });
+    var byId = {}, byName = {}, used = {};
+    (data.respuestas || []).forEach(function(r){
+      var id = String(r.id);
+      byId[id] = r;
+      // Respuestas guardadas sin id de la lista: se pueden unir por nombre
+      if (/^x-/.test(id) || id === "undefined") byName[norm(r.nombre)] = r;
+    });
+    var nameCount = {};
+    (data.invitados || []).forEach(function(g){ var k = norm(g.nombre); nameCount[k] = (nameCount[k] || 0) + 1; });
     var rows = (data.invitados || []).map(function(g){
-      var r = byId[String(g.id)];
-      return { id:String(g.id), nombre:g.nombre, telefono:String(g.telefono||""), cupo:+g.personas||1,
+      var gid = String(g.id || "");
+      var r = (gid && byId[gid]) || (nameCount[norm(g.nombre)] === 1 ? byName[norm(g.nombre)] : null);
+      if (r) used[String(r.id)] = true;
+      return { id:gid, nombre:g.nombre, telefono:String(g.telefono||""), cupo:+g.personas||1,
                estado: r ? (r.asiste === "si" ? "si" : "no") : "pend", personas: r ? (+r.personas||0) : 0,
-               telResp: r ? String(r.telefono||"") : "", fecha: r ? r.fecha : null, enLista:true };
+               telResp: r ? String(r.telefono||"") : "", fecha: r ? r.fecha : null, enLista:true,
+               // Quien ya respondió recibió la liga aunque no se haya marcado
+               enviada: g.enviada || (r ? r.fecha : ""), enviadaManual: !!g.enviada, abierta: g.abierta || "" };
     });
     // Respuestas de ligas genéricas (sin invitado en la lista)
     (data.respuestas || []).forEach(function(r){
-      if (!rows.some(function(x){ return x.id === String(r.id); }))
+      if (!used[String(r.id)] && !rows.some(function(x){ return x.id && x.id === String(r.id); }))
         rows.push({ id:String(r.id), nombre:r.nombre, telefono:String(r.telefono||""), cupo:Math.max(1,+r.personas||1),
                     estado: r.asiste === "si" ? "si" : "no", personas:+r.personas||0, telResp:String(r.telefono||""), fecha:r.fecha, enLista:false });
     });
@@ -401,6 +441,7 @@ td .acts{display:flex;gap:.4rem;justify-content:flex-end;flex-wrap:nowrap}
     var d = new Date(iso); if (isNaN(d)) return "";
     return d.toLocaleDateString("es-MX", { day:"numeric", month:"short" }) + " · " + d.toLocaleTimeString("es-MX", { hour:"numeric", minute:"2-digit" });
   }
+  function dia(iso){ var d = new Date(iso); return isNaN(d) ? "" : d.toLocaleDateString("es-MX", { day:"numeric", month:"short" }); }
   function initials(n){ return String(n||"?").replace(/^(familia|los|las|tío|tía|compadres)\s+/i,"").split(/\s+/).filter(Boolean).slice(0,2).map(function(w){return w[0];}).join("").toUpperCase(); }
   function esc(s){ return String(s == null ? "" : s).replace(/[&<>"']/g, function(c){ return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]; }); }
   function prettyTel(t){ var d = String(t||"").replace(/\D/g,""); if (d.length === 10) return d.slice(0,2)+" "+d.slice(2,6)+" "+d.slice(6); return t || "—"; }
@@ -484,7 +525,7 @@ td .acts{display:flex;gap:.4rem;justify-content:flex-end;flex-wrap:nowrap}
     } else {
       body = '<ul class="people">' + list.map(function(r){
         var meta = open === "pend"
-          ? prettyTel(r.telefono)
+          ? prettyTel(r.telefono) + " · " + (!r.id ? "sin liga" : r.abierta ? "abrió la invitación " + dia(r.abierta) : r.enviada ? "enviada " + dia(r.enviada) : "no enviada")
           : fecha(r.fecha) + (r.telResp ? " · " + prettyTel(r.telResp) : "");
         var right = open === "si"
           ? '<span class="qty">' + r.personas + '<small>de ' + r.cupo + '</small></span>'
@@ -505,25 +546,81 @@ td .acts{display:flex;gap:.4rem;justify-content:flex-end;flex-wrap:nowrap}
   var waIcon = '<svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 1.3a6.6 6.6 0 0 0-5.7 10l-.9 3.3 3.4-.9A6.6 6.6 0 1 0 8 1.3Zm0 12a5.4 5.4 0 0 1-2.8-.8l-.2-.1-2 .5.5-2-.1-.2A5.4 5.4 0 1 1 8 13.3Zm3-4c-.2-.1-1-.5-1.1-.5-.2-.1-.3-.1-.4.1l-.5.6c-.1.1-.2.1-.4 0a4.4 4.4 0 0 1-2.2-1.9c-.2-.3.2-.3.5-1 .1-.1 0-.2 0-.3l-.5-1.2c-.1-.3-.3-.3-.4-.3h-.3a.6.6 0 0 0-.4.2 1.8 1.8 0 0 0-.6 1.3 3.1 3.1 0 0 0 .7 1.7 7.1 7.1 0 0 0 2.7 2.4c1 .4 1.4.5 1.9.4.3 0 1-.4 1.1-.8.1-.4.1-.7.1-.8l-.2-.2Z"/></svg>';
   var copyIcon = '<svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="5" y="5" width="9" height="9" rx="1.5"/><path d="M11 5V3.5A1.5 1.5 0 0 0 9.5 2h-6A1.5 1.5 0 0 0 2 3.5v6A1.5 1.5 0 0 0 3.5 11H5"/></svg>';
 
+  var CHIPS = [
+    ["todos", "Todos", function(){ return true; }],
+    ["porEnviar", "Por enviar", function(r){ return !r.enviada; }],
+    ["enviadas", "Enviadas", function(r){ return !!r.enviada; }],
+    ["abiertas", "Abrieron sin responder", function(r){ return r.estado === "pend" && !!r.abierta; }]
+  ];
+
+  function envioCell(r){
+    if (!r.id) return '<span style="color:var(--muted);font-size:.8rem">—</span>';
+    var on = !!r.enviada;
+    var label = on ? "Enviada " + dia(r.enviada) : "Por enviar";
+    var auto = on && !r.enviadaManual;
+    return '<button class="sent" type="button" data-sent="' + esc(r.id) + '" aria-pressed="' + on + '" title="' +
+      (auto ? "Ya respondió, así que la recibió" : on ? "Desmarcar como enviada" : "Marcar como enviada") + '"' + (auto ? ' disabled style="cursor:default;opacity:1"' : "") + '>' +
+      '<span class="sw" aria-hidden="true"></span>' + label + '</button>' +
+      (r.abierta ? '<span class="opened">Abrió ' + dia(r.abierta) + '</span>' : "");
+  }
+
   function renderTable(rows){
+    var inList = rows.filter(function(r){ return r.enLista; });
+    $("chips").innerHTML = CHIPS.map(function(c){
+      var n = inList.filter(c[2]).length;
+      return '<button class="chip" type="button" data-chip="' + c[0] + '" aria-pressed="' + (filterChip === c[0]) + '">' + c[1] + ' <b>' + n + '</b></button>';
+    }).join("");
+    var chipFn = CHIPS.filter(function(c){ return c[0] === filterChip; })[0][2];
     var f = filterTable.toLowerCase();
-    var list = rows.filter(function(r){ return r.enLista && (!f || r.nombre.toLowerCase().indexOf(f) >= 0 || r.telefono.indexOf(f) >= 0); })
+    var list = inList.filter(function(r){ return chipFn(r) && (!f || r.nombre.toLowerCase().indexOf(f) >= 0 || r.telefono.indexOf(f) >= 0); })
       .sort(function(a, b){ return a.nombre.localeCompare(b.nombre, "es"); });
+    var sinId = inList.filter(function(r){ return !r.id; });
+    $("noIdBanner").hidden = !sinId.length;
+    if (sinId.length) $("noIdText").innerHTML = "<b>" + plural(sinId.length, "invitado no tiene", "invitados no tienen") + " liga todavía.</b> En Google Sheets usa <b>60 Pepe → Generar ids y ligas</b> y luego presiona Actualizar. Mientras tanto, sus botones de enviar están desactivados.";
     if (!list.length) {
-      $("tbody").innerHTML = '<tr><td colspan="5" class="empty">' + (f ? "Nadie coincide con esa búsqueda." : "Aún no hay invitados. Agrega la lista en la hoja <b>Invitados</b> de Google Sheets y presiona Actualizar.") + '</td></tr>';
+      $("tbody").innerHTML = '<tr><td colspan="6" class="empty">' + (f || filterChip !== "todos" ? "Ningún invitado coincide con este filtro." : "Aún no hay invitados. Agrega la lista en la hoja <b>Invitados</b> de Google Sheets y presiona Actualizar.") + '</td></tr>';
       return;
     }
     $("tbody").innerHTML = list.map(function(r){
       var cls = "t-" + r.estado;
       var est = r.estado === "si" ? "Aceptó · " + r.personas : r.estado === "no" ? "No asistirá" : "Sin respuesta";
+      var acts = r.id
+        ? '<button class="btn sm" type="button" data-copy="' + esc(r.id) + '">' + copyIcon + 'Copiar liga</button>' +
+          '<a class="btn sm wa" target="_blank" rel="noopener" data-wa="' + esc(r.id) + '" href="' + esc(waLink(r, false)) + '">' + waIcon + 'Enviar</a>'
+        : '<span class="btn sm" aria-disabled="true" style="opacity:.55;cursor:not-allowed">Falta generar liga</span>';
       return '<tr><td><b style="font-weight:500">' + esc(r.nombre) + '</b></td><td class="num">' + r.cupo + '<span class="lw">' + (r.cupo === 1 ? " lugar" : " lugares") + '</span></td><td style="font-variant-numeric:tabular-nums;white-space:nowrap">' + esc(prettyTel(r.telefono)) +
-        '</td><td><span class="pill ' + cls + '">' + est + '</span></td><td><div class="acts">' +
-        '<button class="btn sm" type="button" data-copy="' + esc(r.id) + '">' + copyIcon + 'Copiar liga</button>' +
-        '<a class="btn sm wa" target="_blank" rel="noopener" href="' + esc(waLink(r, false)) + '">' + waIcon + 'Enviar</a></div></td></tr>';
+        '</td><td><span class="pill ' + cls + '">' + est + '</span></td><td>' + envioCell(r) + '</td><td><div class="acts">' + acts + '</div></td></tr>';
     }).join("");
   }
 
+  $("chips").addEventListener("click", function(e){
+    var c = e.target.closest("[data-chip]"); if (!c || !data) return;
+    filterChip = c.dataset.chip; renderTable(model());
+  });
+
+  // Marca o desmarca la liga como enviada (se guarda en la hoja Invitados)
+  function marcarEnviada(id, valor){
+    var g = (data.invitados || []).filter(function(x){ return String(x.id) === id; })[0]; if (!g) return;
+    var antes = g.enviada;
+    g.enviada = valor ? new Date().toISOString() : "";
+    render();
+    if (DEMO) return;
+    fetch(API + "?action=enviada&key=" + encodeURIComponent(LS.get("dash60:key") || "") + "&id=" + encodeURIComponent(id) + "&valor=" + (valor ? 1 : 0))
+      .then(function(r){ return r.json(); })
+      .then(function(j){ if (!j || !j.ok) throw new Error(j && j.error); if (j.enviada !== undefined) g.enviada = j.enviada; })
+      .catch(function(){
+        g.enviada = antes; render();
+        $("errText").innerHTML = "<b>No se pudo guardar la marca de enviada.</b> Revisa tu conexión y vuelve a intentarlo.";
+        $("errBanner").hidden = false;
+      });
+  }
+
   $("tbody").addEventListener("click", function(e){
+    var sw = e.target.closest("[data-sent]");
+    if (sw) { marcarEnviada(sw.dataset.sent, sw.getAttribute("aria-pressed") !== "true"); return; }
+    // Al abrir WhatsApp desde Enviar, se marca sola (sin bloquear el enlace)
+    var wa = e.target.closest("[data-wa]");
+    if (wa) { var gw = (data.invitados || []).filter(function(x){ return String(x.id) === wa.dataset.wa; })[0]; if (gw && !gw.enviada) setTimeout(function(){ marcarEnviada(wa.dataset.wa, true); }, 0); return; }
     var b = e.target.closest("[data-copy]"); if (!b) return;
     var r = model().filter(function(x){ return x.id === b.dataset.copy; })[0]; if (!r) return;
     var link = inviteLink(r);
@@ -547,7 +644,7 @@ td .acts{display:flex;gap:.4rem;justify-content:flex-end;flex-wrap:nowrap}
   $("download").addEventListener("click", function(){
     if (!data) return;
     var out = { evento: "60 Pepe · 19 de diciembre 2026", generado: new Date().toISOString(), invitados: model().map(function(r){
-      return { id:r.id, nombre:r.nombre, telefono:r.telefono, lugares:r.cupo, estado: r.estado === "si" ? "aceptó" : r.estado === "no" ? "rechazó" : "sin respuesta", personas_confirmadas:r.personas, fecha_respuesta:r.fecha };
+      return { id:r.id, nombre:r.nombre, telefono:r.telefono, lugares:r.cupo, estado: r.estado === "si" ? "aceptó" : r.estado === "no" ? "rechazó" : "sin respuesta", personas_confirmadas:r.personas, fecha_respuesta:r.fecha, liga_enviada:r.enviada || null, abrio_invitacion:r.abierta || null };
     }) };
     var blob = new Blob([JSON.stringify(out, null, 2)], { type:"application/json" });
     var a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = "confirmaciones-60-pepe.json";
